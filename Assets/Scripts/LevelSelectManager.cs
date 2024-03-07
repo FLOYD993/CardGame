@@ -14,6 +14,7 @@ public class LevelSelectManager : MonoBehaviour
     [SerializeField] private bool isUnlocked;
 
     public GameSceneSO sceneToGo;
+
     private void Start()
     {
         unlockedIndex = PlayerPrefs.GetInt("unlockedIndex");
