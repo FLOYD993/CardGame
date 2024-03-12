@@ -2,35 +2,45 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LevelSelection : MonoBehaviour
 {
-    [SerializeField] private bool unlocked;
-    [SerializeField] private Button button;
+    [SerializeField] private bool unlocked; //default value is false
     public Image lockImage;
-
-    public SceneLoadEventSO loadEventSO;
-    public GameSceneSO sceneToGo;
-
+    private void Start()
+    {
+        //PlayerPrefs.DeleteAll(); 清空数据
+    }
     private void Update()
     {
         UpdateLevelImage();
+        UpdateLevelStatus();
     }
-    public void UpdateLevelImage()
+    private void UpdateLevelImage()
     {
         if (!unlocked)
         {
-            button.interactable = false;
             lockImage.gameObject.SetActive(true);
         }
         else
         {
-            button.interactable = true;
             lockImage.gameObject.SetActive(false);
         }
     }
-    public void SwitchScene()
+    private void UpdateLevelStatus()
     {
-        loadEventSO.RaiseLoadRequestEvent(sceneToGo, true);
+        int preLevelIndex = int.Parse(gameObject.name) - 1;
+        if (PlayerPrefs.GetInt("lv" + preLevelIndex) > 0) //如果第四关通了，解锁第五关
+        {
+            unlocked = true;
+        }
+    }
+    public void PressSelection(string _levelNum)
+    {
+        if(unlocked)
+        {
+            SceneManager.LoadScene(_levelNum);
+        }
     }
 }
