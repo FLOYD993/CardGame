@@ -226,6 +226,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unlocked: 0
   lockImage: {fileID: 3189696041366059219}
+  rawImage: {fileID: 0}
+  fadeSpeed: 1.5
 --- !u!1 &8964101896636489895
 GameObject:
   m_ObjectHideFlags: 0

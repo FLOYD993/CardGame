@@ -6,14 +6,27 @@ using UnityEngine.SceneManagement;
 
 public class LevelSelection : MonoBehaviour
 {
-    [SerializeField] private bool unlocked; //default value is false
+    public bool unlocked; //default value is false
     public Image lockImage;
+
+    [Header("淡入淡出效果")]
+    public RawImage rawImage;
+    public float fadeSpeed = 1.5f; //速度
+    private bool isFade = true; //是否开启效果
     private void Start()
     {
-        //PlayerPrefs.DeleteAll(); 清空数据
+        //rawImage = GetComponent<RawImage>();
+        //将图片设置为屏幕大小
+        rawImage.uvRect = new Rect(0, 0, Screen.width, Screen.height);
+
+        //PlayerPrefs.DeleteAll(); //清空数据
     }
     private void Update()
     {
+        if (isFade)
+        {
+            StartCoroutine(FadeInCoroutine());
+        }
         UpdateLevelImage();
         UpdateLevelStatus();
     }
@@ -36,11 +49,44 @@ public class LevelSelection : MonoBehaviour
             unlocked = true;
         }
     }
+    private void FadeIn()
+    {
+        rawImage.color = Color.Lerp(rawImage.color, Color.clear, fadeSpeed * Time.deltaTime);
+    }
+    //屏幕渐显
+    public void FadeOut()
+    {
+        rawImage.color = Color.Lerp(rawImage.color, Color.black, fadeSpeed * Time.deltaTime);
+    }
+    //游戏退出FadeOut
     public void PressSelection(string _levelNum)
     {
-        if(unlocked)
+        if (unlocked)
         {
-            SceneManager.LoadScene(_levelNum);
+            StartCoroutine(FadeOutCoroutine(_levelNum));
         }
+    }
+    private IEnumerator FadeOutCoroutine(string _levelNum)
+    {
+        rawImage.enabled = true;
+        while (rawImage.color.a <= 0.96f)
+        {
+            FadeOut();
+            yield return null;
+        }
+        SceneManager.LoadScene(_levelNum);
+    }
+    //游戏开始FadeIn
+    private IEnumerator FadeInCoroutine()
+    {
+        rawImage.enabled = true;
+        while (rawImage.color.a > 0.05f)
+        {
+            FadeIn();
+            yield return null;
+        }
+        rawImage.color = Color.clear;
+        rawImage.enabled = false;
+        isFade = false;
     }
 }

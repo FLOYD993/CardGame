@@ -1,44 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-public class SingleLevel : MonoBehaviour
+public class FadeInOut : MonoBehaviour
 {
-    //public bool isFinished;
-    //private int currentFinishedFlag = 0; //0未完成，1已完成
-    public int levelIndex = 0;
-
-    [Header("场景淡入淡出")]
     public float fadeSpeed = 1.5f; //速度
     private bool isFade = true; //是否开启效果
     public RawImage rawImage;
 
-    private void Awake()
-    {
-        DontDestroyOnLoad(transform.gameObject);
-    }
+    public bool unlocked_;
+    //private void Awake()
+    //{
+    //    instance = this;
+    //}
     private void Start()
     {
+        rawImage = GetComponent<RawImage>();
+        //将图片设置为屏幕大小
         rawImage.uvRect = new Rect(0, 0, Screen.width, Screen.height);
+        unlocked_ = GetComponent<LevelSelection>().unlocked;
     }
     private void Update()
     {
-        if (isFade)
+        if(isFade)
         {
             StartScene();
         }
     }
-    public void BackButton()
-    {
-        StartCoroutine(TransitionToLevel());
-    }
-    public void Finished(int flag)
-    {
-        PlayerPrefs.SetInt("lv"+levelIndex, flag);
-        Debug.Log(PlayerPrefs.GetInt("lv" + levelIndex, flag));
-    }
+    //屏幕渐隐
     private void FadeIn()
     {
         rawImage.color = Color.Lerp(rawImage.color, Color.clear, fadeSpeed * Time.deltaTime);
@@ -52,7 +43,7 @@ public class SingleLevel : MonoBehaviour
     private void StartScene()
     {
         FadeIn();
-        if (rawImage.color.a <= 0.05f)
+        if(rawImage.color.a < 0.05f)
         {
             rawImage.color = Color.clear;
             rawImage.enabled = false;
@@ -60,14 +51,21 @@ public class SingleLevel : MonoBehaviour
         }
     }
     //游戏退出时
-    private IEnumerator TransitionToLevel()
+    public void EndScene()
     {
         rawImage.enabled = true;
-        while (rawImage.color.a <= 0.96f)
+        FadeOut();
+        //切换场景
+    }
+    public void PressSelection(string _levelNum)
+    {
+        if (unlocked_)
         {
-            FadeOut();
-            yield return null;
+            EndScene();
+            if (rawImage.color.a > 0.95f)
+            {
+                SceneManager.LoadScene(_levelNum);
+            }
         }
-        SceneManager.LoadScene("Persistent Scene");
     }
 }
