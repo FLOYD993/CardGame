@@ -25,7 +25,7 @@ public class LevelSelection : MonoBehaviour
     {
         if (isFade)
         {
-            StartCoroutine(FadeInCoroutine());
+            StartScene();
         }
         UpdateLevelImage();
         UpdateLevelStatus();
@@ -66,6 +66,16 @@ public class LevelSelection : MonoBehaviour
             StartCoroutine(FadeOutCoroutine(_levelNum));
         }
     }
+    private void StartScene()
+    {
+        FadeIn();
+        if(rawImage.color.a <= 0.05f)
+        {
+            rawImage.color = Color.clear;
+            rawImage.enabled = false;
+            isFade = false;
+        }
+    }
     private IEnumerator FadeOutCoroutine(string _levelNum)
     {
         rawImage.enabled = true;
@@ -77,16 +87,16 @@ public class LevelSelection : MonoBehaviour
         SceneManager.LoadScene(_levelNum);
     }
     //ÓÎÏ·¿ªÊ¼FadeIn
-    private IEnumerator FadeInCoroutine()
-    {
-        rawImage.enabled = true;
-        while (rawImage.color.a > 0.05f)
-        {
-            FadeIn();
-            yield return null;
-        }
-        rawImage.color = Color.clear;
-        rawImage.enabled = false;
-        isFade = false;
-    }
+    //private IEnumerator FadeInCoroutine()
+    //{
+    //    rawImage.enabled = true;
+    //    while (rawImage.color.a > 0.05f)
+    //    {
+    //        FadeIn();
+    //        yield return null;
+    //    }
+    //    rawImage.color = Color.clear;
+    //    rawImage.enabled = false;
+    //    isFade = false;
+    //}
 }
