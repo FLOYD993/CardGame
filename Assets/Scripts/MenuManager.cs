@@ -62,6 +62,11 @@ public class MenuManager : MonoBehaviour
     {
 
     }
+    public void EndGame()
+    {
+        UnityEditor.EditorApplication.isPlaying = false;
+        Application.Quit();
+    }
     public void ShowAboutUS()
     {
         aboutusPanel.SetActive(true);
