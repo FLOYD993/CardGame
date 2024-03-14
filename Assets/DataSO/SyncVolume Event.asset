@@ -10,5 +10,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7dbab5a598f19fc4ba6c3d62fa2267fc, type: 3}
-  m_Name: VolumeChange EventSO
+  m_Name: SyncVolume Event
   m_EditorClassIdentifier: 

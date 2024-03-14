@@ -51,7 +51,7 @@ public class MenuManager : MonoBehaviour
             FadeOut();
             yield return null;
         }
-        SceneManager.LoadScene("Persistent Scene");
+        SceneManager.LoadScene("Main Scene");
     }
     
     public void StartGame()

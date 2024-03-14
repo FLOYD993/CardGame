@@ -400,7 +400,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -254, y: -189}
+  m_AnchoredPosition: {x: -254, y: -227}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &87637581
@@ -852,9 +852,9 @@ RectTransform:
   m_Children:
   - {fileID: 727805228}
   - {fileID: 1990731112}
-  - {fileID: 2100088381}
   - {fileID: 2046468348}
   - {fileID: 87637580}
+  - {fileID: 2100088381}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1675,6 +1675,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BGMEvent: {fileID: 11400000, guid: c65b68fb96c4c0c418e98aea50864c42, type: 2}
   volumeEvent: {fileID: 11400000, guid: 1e3ca4b3ed88d9d4a806dc70df2b9452, type: 2}
+  pauseEvent: {fileID: 11400000, guid: 724c3998114311046af82ec57e8d0e17, type: 2}
+  syncVolumeEvent: {fileID: 11400000, guid: 9acf3cd781d60a145985f55b49675922, type: 2}
   BGMSource: {fileID: 719066881}
   audioMixer: {fileID: 24100000, guid: 88d1112b171bc2842be9fb913efa36ac, type: 2}
 --- !u!4 &719066883
@@ -2824,8 +2826,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e97c2a7cbe83c85438cbd5e67484f384, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pauseEvent: {fileID: 11400000, guid: 724c3998114311046af82ec57e8d0e17, type: 2}
+  syncVolumeEvent: {fileID: 11400000, guid: 9acf3cd781d60a145985f55b49675922, type: 2}
   settingsBtn: {fileID: 87637583}
   pausePanel: {fileID: 2046468347}
+  volumeSlider: {fileID: 2442769}
 --- !u!4 &2055138450
 Transform:
   m_ObjectHideFlags: 0
@@ -3022,7 +3027,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6842881609753894979, guid: 3a79b9499e0720345bc7badade73f86c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

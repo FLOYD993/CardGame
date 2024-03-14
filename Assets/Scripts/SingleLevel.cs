@@ -68,6 +68,6 @@ public class SingleLevel : MonoBehaviour
             FadeOut();
             yield return null;
         }
-        SceneManager.LoadScene("Persistent Scene");
+        SceneManager.LoadScene("Main Scene");
     }
 }
