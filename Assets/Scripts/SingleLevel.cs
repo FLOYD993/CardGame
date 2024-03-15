@@ -69,5 +69,6 @@ public class SingleLevel : MonoBehaviour
             yield return null;
         }
         SceneManager.LoadScene("Main Scene");
+        SceneManager.LoadScene(5, LoadSceneMode.Additive);
     }
 }

@@ -52,6 +52,7 @@ public class MenuManager : MonoBehaviour
             yield return null;
         }
         SceneManager.LoadScene("Main Scene");
+        SceneManager.LoadScene(5, LoadSceneMode.Additive);
     }
     
     public void StartGame()

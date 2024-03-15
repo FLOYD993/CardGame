@@ -85,6 +85,7 @@ public class LevelSelection : MonoBehaviour
             yield return null;
         }
         SceneManager.LoadScene(_levelNum);
+        SceneManager.LoadScene(5, LoadSceneMode.Additive);
     }
     //ÓÎÏ·¿ªÊ¼FadeIn
     //private IEnumerator FadeInCoroutine()
